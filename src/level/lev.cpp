@@ -1,32 +1,31 @@
 #include "lev.hpp"
 #include <fmt/core.h>
-#include <iostream>
 
-Tile::Tile(const sf::Vector2f& pos, const std::string& textureFile, bool interactive)
-        : position(pos), isInteractive(interactive) {
-    if (texture.loadFromFile(textureFile)) {
-        sprite.setTexture(texture);
-        sprite.setPosition(position);
-        sprite.setScale(5.0f, 5.0f);
-    } else {
-        fmt::println("Failed to load texture: ");
-    }
-}
+Tile::Tile(const sf::Vector2f& pos)
+        : position(pos) {}
 
 void Tile::addBoundary(const sf::FloatRect& rect) {
     sf::RectangleShape boundary;
-    boundary.setPosition(rect.left, rect.top);
-    boundary.setSize(sf::Vector2f(rect.width, rect.height));
-    boundary.setFillColor(sf::Color::Red);
+    boundary.setPosition(rect.left*5, rect.top*5);
+    boundary.setSize(sf::Vector2f(rect.width*5, rect.height*5));
+    boundary.setFillColor(sf::Color::Transparent);
     boundaries.push_back(boundary);
 }
 
-Level::Level(int r, int c)
+Level::Level(int r, int c, sf::Sprite& textureSprite)
         : rows(r), cols(c) {
     tiles.resize(rows, std::vector<Tile*>(cols, nullptr));
+    sprite = textureSprite;
+
 }
 
-Level::~Level() = default;
+//Level::~Level() {
+//    for (int i = 0; i < rows; ++i) {
+//        for (int j = 0; j < cols; ++j) {
+//            delete tiles[i][j];
+//        }
+//    }
+//}
 
 void Level::setTile(int row, int col, Tile* tile) {
     if (row < rows && col < cols) {
@@ -35,10 +34,10 @@ void Level::setTile(int row, int col, Tile* tile) {
 }
 
 void Level::draw(sf::RenderWindow& window) {
+    window.draw(sprite);
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             if (tiles[i][j] != nullptr) {
-                window.draw(tiles[i][j]->sprite);
                 for (const auto& boundary : tiles[i][j]->boundaries) {
                     window.draw(boundary);
                 }
@@ -59,5 +58,10 @@ bool Level::checkCollision(const sf::FloatRect& playerBounds) {
             }
         }
     }
+//    for (const auto& door : doors) {
+//        if (door.boundary.intersects(playerBounds)) {
+//            return true;
+//        }
+//    }
     return false;
 }

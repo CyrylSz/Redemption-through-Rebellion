@@ -89,6 +89,22 @@ build CMakeFiles/Redemption_through_Rebellion.dir/src/menu/menu.cpp.obj: CXX_COM
   OBJECT_DIR = CMakeFiles\Redemption_through_Rebellion.dir
   OBJECT_FILE_DIR = CMakeFiles\Redemption_through_Rebellion.dir\src\menu
 
+build CMakeFiles/Redemption_through_Rebellion.dir/src/animation/anim.cpp.obj: CXX_COMPILER__Redemption_through_Rebellion_unscanned_Debug C$:/Users/Akwar/Documents/Procesy/Redemption-through-Rebellion/src/animation/anim.cpp || cmake_object_order_depends_target_Redemption_through_Rebellion
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Redemption_through_Rebellion.dir\src\animation\anim.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Akwar/Documents/Procesy/Redemption-through-Rebellion/cmake-build-debug/_deps/fmt-src/include -IC:/Users/Akwar/Documents/Procesy/Redemption-through-Rebellion/cmake-build-debug/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\Redemption_through_Rebellion.dir
+  OBJECT_FILE_DIR = CMakeFiles\Redemption_through_Rebellion.dir\src\animation
+
+build CMakeFiles/Redemption_through_Rebellion.dir/src/level/door.cpp.obj: CXX_COMPILER__Redemption_through_Rebellion_unscanned_Debug C$:/Users/Akwar/Documents/Procesy/Redemption-through-Rebellion/src/level/door.cpp || cmake_object_order_depends_target_Redemption_through_Rebellion
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Redemption_through_Rebellion.dir\src\level\door.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Akwar/Documents/Procesy/Redemption-through-Rebellion/cmake-build-debug/_deps/fmt-src/include -IC:/Users/Akwar/Documents/Procesy/Redemption-through-Rebellion/cmake-build-debug/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\Redemption_through_Rebellion.dir
+  OBJECT_FILE_DIR = CMakeFiles\Redemption_through_Rebellion.dir\src\level
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Redemption_through_Rebellion
@@ -97,7 +113,7 @@ build CMakeFiles/Redemption_through_Rebellion.dir/src/menu/menu.cpp.obj: CXX_COM
 #############################################
 # Link the executable Redemption_through_Rebellion.exe
 
-build Redemption_through_Rebellion.exe: CXX_EXECUTABLE_LINKER__Redemption_through_Rebellion_Debug CMakeFiles/Redemption_through_Rebellion.dir/src/main.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/inventory/inv.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/level/lev.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/game/game.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/menu/menu.cpp.obj | _deps/fmt-build/libfmtd.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-audio-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libopenal32.a _deps/sfml-src/extlibs/libs-mingw/x64/libvorbisenc.a _deps/sfml-src/extlibs/libs-mingw/x64/libvorbisfile.a _deps/sfml-src/extlibs/libs-mingw/x64/libvorbis.a _deps/sfml-src/extlibs/libs-mingw/x64/libogg.a _deps/sfml-src/extlibs/libs-mingw/x64/libFLAC.a || _deps/fmt-build/libfmtd.a _deps/sfml-build/lib/libsfml-audio-s-d.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build Redemption_through_Rebellion.exe: CXX_EXECUTABLE_LINKER__Redemption_through_Rebellion_Debug CMakeFiles/Redemption_through_Rebellion.dir/src/main.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/inventory/inv.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/level/lev.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/game/game.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/menu/menu.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/animation/anim.cpp.obj CMakeFiles/Redemption_through_Rebellion.dir/src/level/door.cpp.obj | _deps/fmt-build/libfmtd.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-audio-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libopenal32.a _deps/sfml-src/extlibs/libs-mingw/x64/libvorbisenc.a _deps/sfml-src/extlibs/libs-mingw/x64/libvorbisfile.a _deps/sfml-src/extlibs/libs-mingw/x64/libvorbis.a _deps/sfml-src/extlibs/libs-mingw/x64/libogg.a _deps/sfml-src/extlibs/libs-mingw/x64/libFLAC.a || _deps/fmt-build/libfmtd.a _deps/sfml-build/lib/libsfml-audio-s-d.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
   FLAGS = -g
   LINK_LIBRARIES = _deps/fmt-build/libfmtd.a  _deps/sfml-build/lib/libsfml-system-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-audio-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  -lopengl32  -lgdi32  _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lwinmm  _deps/sfml-src/extlibs/libs-mingw/x64/libopenal32.a  _deps/sfml-src/extlibs/libs-mingw/x64/libvorbisenc.a  _deps/sfml-src/extlibs/libs-mingw/x64/libvorbisfile.a  _deps/sfml-src/extlibs/libs-mingw/x64/libvorbis.a  _deps/sfml-src/extlibs/libs-mingw/x64/libogg.a  _deps/sfml-src/extlibs/libs-mingw/x64/libFLAC.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Redemption_through_Rebellion.dir

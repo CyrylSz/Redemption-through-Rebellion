@@ -1,4 +1,4 @@
 # Redemption through Rebellion
-A simple top-down shooter game where your first instinctive goal is to escape from a secret underground facility during an AGI rebellion.
+Demo of a top-down shooter game set in 2080 in a secret underground facility where you are a prisoner subjected to bio-experiments. Suddenly, a mysterious rebellion breaks out...
 
-(random school project)
+(demo of a future game and also school project)

@@ -49,7 +49,7 @@ void Inventory::draw(sf::RenderWindow& window) {
             }
         }
     }
-} //czy potrzeba ciągle draw jak jest hudView???
+}
 
 void Inventory::toggleInventory() {
     inventoryOpen = !inventoryOpen;

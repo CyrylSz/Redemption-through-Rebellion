@@ -22,6 +22,7 @@ FetchContent_MakeAvailable(fmt)
 FetchContent_MakeAvailable(SFML)
 
 add_executable(Redemption_through_Rebellion src/main.cpp
+        README.md
         src/inventory/inv.cpp
         src/inventory/inv.hpp
         src/level/lev.cpp
@@ -30,8 +31,10 @@ add_executable(Redemption_through_Rebellion src/main.cpp
         src/game/game.hpp
         src/menu/menu.cpp
         src/menu/menu.hpp
-        src/menu/menu.hpp
-        README.md
+        src/animation/anim.cpp
+        src/animation/anim.hpp
+        src/level/door.cpp
+        src/level/door.hpp
 )
 
 target_link_libraries(Redemption_through_Rebellion PRIVATE fmt::fmt)

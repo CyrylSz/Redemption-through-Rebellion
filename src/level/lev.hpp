@@ -4,31 +4,31 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
+#include "door.hpp"
 
 class Tile {
 public:
-    sf::Sprite sprite;
-    sf::Texture texture;
     sf::Vector2f position;
-    bool isInteractive;
     std::vector<sf::RectangleShape> boundaries;
 
-    Tile(const sf::Vector2f& pos, const std::string& textureFile, bool interactive = false);
+    explicit Tile(const sf::Vector2f& pos);
     void addBoundary(const sf::FloatRect& rect);
 };
 
 class Level {
 public:
+    sf::Sprite sprite;
     std::vector<std::vector<Tile*>> tiles;
+    std::vector<Door> doors;
     int rows;
     int cols;
 
-    Level(int r, int c);
-    ~Level();
+    Level(int r, int c, sf::Sprite& textureFile);
+    //~Level();
 
     void setTile(int row, int col, Tile* tile);
     void draw(sf::RenderWindow& window);
     bool checkCollision(const sf::FloatRect& playerBounds);
 };
 
-#endif // LEV_HPP
+#endif

@@ -11,7 +11,7 @@ int main() {
 // 2. loot and barriers
 // 3. key card and elevator
 // 4. game save system
-// 5. animations
+// 5. animation
 // 6. enemies
 // 7. boss
 // 8. cutscenes and lore
