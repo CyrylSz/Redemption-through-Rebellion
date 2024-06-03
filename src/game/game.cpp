@@ -14,7 +14,7 @@ sf::Vector2f normalize(const sf::Vector2f &source) {
 
 Game::Game()
         : window(sf::VideoMode::getDesktopMode(), "Redemption-through-Rebellion", sf::Style::Fullscreen),
-          currentLevel(0), gameWon(false), playerSpeed(700.0f), inventory(font),
+          currentLevel(0), gameWon(false), playerSpeed(700.0f), inventory(font, this),
           gameState(GameState::Menu), menu(window, font, "C:\\Users\\Akwar\\Documents\\Procesy\\Redemption-through-Rebellion\\res\\background.png"),
           useFirstSegment(true), animationFinished(false) {
 
@@ -106,7 +106,7 @@ void Game::initializePrisonLevel() {
             fmt::println("Failed to load door texture: ", i);
         }
 
-    items.clear();
+    MapItems.clear();
     short numOf_Items = 3;
     PrisonLevelItemsTextures.resize(numOf_Items);
     std::vector<sf::Sprite> ITEM;
@@ -145,7 +145,23 @@ void Game::initializePrisonLevel() {
                         tile->addBoundary(sf::FloatRect(pos.x+16, pos.y+88, 85, 8));
                         tile->addBoundary(sf::FloatRect(pos.x+95, pos.y+60, 6, 28));
                         ITEM[0].setPosition(5*(pos.x+77),5*(pos.y+70));
-                        items.emplace_back(ITEM[0], false);
+                        ITEM[1].setPosition(5*(pos.x+77),5*(pos.y+70));
+                        ITEM[2].setPosition(5*(pos.x+77),5*(pos.y+70));
+                        MapItems.emplace_back(ITEM[1], false, "But", "Można nim rzucać");
+                        MapItems.emplace_back(ITEM[0], false, "Widelec", "Damage: 4");
+                        MapItems.emplace_back(ITEM[2], false, "Keycard", "Otwiera metalowe drzwi");
+                        MapItems.emplace_back(ITEM[1], false, "But", "Można nim rzucać");
+                        MapItems.emplace_back(ITEM[0], false, "Widelec", "Damage: 4");
+                        MapItems.emplace_back(ITEM[2], false, "Keycard", "Otwiera metalowe drzwi");
+                        MapItems.emplace_back(ITEM[1], false, "But", "Można nim rzucać");
+                        MapItems.emplace_back(ITEM[0], false, "Widelec", "Damage: 4");
+                        MapItems.emplace_back(ITEM[2], false, "Keycard", "Otwiera metalowe drzwi");
+                        MapItems.emplace_back(ITEM[1], false, "But", "Można nim rzucać");
+                        MapItems.emplace_back(ITEM[0], false, "Widelec", "Damage: 4");
+                        MapItems.emplace_back(ITEM[2], false, "Keycard", "Otwiera metalowe drzwi");
+                        MapItems.emplace_back(ITEM[1], false, "But", "Można nim rzucać");
+                        MapItems.emplace_back(ITEM[0], false, "Widelec", "Damage: 4");
+                        MapItems.emplace_back(ITEM[2], false, "Keycard", "Otwiera metalowe drzwi");
                     } else if (col == 1){
                         tile->addBoundary(sf::FloatRect(pos.x+0, pos.y+24, 8, 72));
                         tile->addBoundary(sf::FloatRect(pos.x+8, pos.y+88, 152, 8));
@@ -166,7 +182,7 @@ void Game::initializePrisonLevel() {
                         tile->addBoundary(sf::FloatRect(pos.x+64, pos.y+88, 556, 8));
                         doors.emplace_back(sf::Vector2f(5*(pos.x+34), 5*(pos.y+92)), doorTexture[0], "E");
                         ITEM[1].setPosition(5*(pos.x+18),5*(pos.y+25));
-                        items.emplace_back(ITEM[1], false);
+                        MapItems.emplace_back(ITEM[1], false, "But", "Można nim rzucać");
                     } else if (col == 9){
                         tile->addBoundary(sf::FloatRect(pos.x+20, pos.y+96, 8, 15));
                         tile->addBoundary(sf::FloatRect(pos.x+100, pos.y+96, 8, 15));
@@ -297,7 +313,7 @@ void Game::initializePrisonLevel() {
                         tile->addBoundary(sf::FloatRect(pos.x, pos.y-8, 128, 8));
                         tile->addBoundary(sf::FloatRect(pos.x+128, pos.y-8, 8, 264));
                         ITEM[2].setPosition(5*(pos.x+10),5*(pos.y+6));
-                        items.emplace_back(ITEM[2], false);
+                        MapItems.emplace_back(ITEM[2], false, "Keycard", "Otwiera metalowe drzwi");
                     }
                     break;
                 case 8:
@@ -423,28 +439,46 @@ void Game::processEvents() {
         } else if (gameState == GameState::Playing) {
             if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::E) {
-                    inventory.toggleInventory();
+                    inventory.toggleBackpack();
+                    if (!inventory.isBackpackOpen()) {
+                        inventory.clearSelection();
+                    }
                 }
                 if (event.key.code == sf::Keyboard::F) {
-                    for (auto& item : items) {
+                    for (auto& item : MapItems) {
                         if (!item.pickedUp && pickupRadius.getGlobalBounds().intersects(item.sprite.getGlobalBounds())) {
-                            if (inventory.addItem(item.sprite)) {
+                            if (inventory.addItem(item.sprite, item.name, item.description)) {
                                 item.pickedUp = true;
                             }
                         }
                     }
                 }
+                if (event.key.code == sf::Keyboard::Num1) {
+                    inventory.holdItem(0);
+                } else if (event.key.code == sf::Keyboard::Num2) {
+                    inventory.holdItem(1);
+                } else if (event.key.code == sf::Keyboard::Num3) {
+                    inventory.holdItem(2);
+                } else if (event.key.code >= sf::Keyboard::Num4 && event.key.code <= sf::Keyboard::Num9) {
+                    inventory.holdItem(-1);
+                }
+            }
+            if (event.type == sf::Event::MouseWheelScrolled) {
+                inventory.handleMouseWheel(-event.mouseWheelScroll.delta);
             }
             if (event.type == sf::Event::MouseButtonPressed) {
-                if (event.mouseButton.button == sf::Mouse::Right) {
-                    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-                    sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-                    inventory.removeItem(0, worldPos); //change later
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    inventory.handleMouseClick(sf::Mouse::getPosition(window));
                 }
+            }
+            if (event.type == sf::Event::MouseMoved) {
+                inventory.handleMouseDrag(sf::Mouse::getPosition(window),
+                  sf::Mouse::isButtonPressed(sf::Mouse::Left), animatedSprite.getPosition());
             }
         }
     }
 }
+
 
 void Game::update(sf::Time deltaTime) {
     if (gameState == GameState::Playing) {
@@ -586,17 +620,18 @@ void Game::render() {
     } else if (gameState == GameState::Playing) {
         if (!gameWon) {
             levels[currentLevel].draw(window);
-            window.draw(animatedSprite);
-//            window.draw(playerHitbox);
-//            window.draw(pickupRadius);
             for (auto& door : doors) {
                 door.draw(window);
             }
-            for (const auto& item : items) {
+            for (const auto& item : MapItems) {
                 if (!item.pickedUp) {
                     window.draw(item.sprite);
                 }
             }
+            window.draw(animatedSprite);
+//            window.draw(playerHitbox);
+//            window.draw(pickupRadius);
+
             window.setView(hudView);
             inventory.draw(window);
         } else {

@@ -24,6 +24,7 @@ class Game {
 public:
     Game();
     void run();
+    std::vector<Item> MapItems;
 
 private:
     sf::RenderWindow window;
@@ -34,7 +35,6 @@ private:
     sf::Text winText;
     bool gameWon;
     Inventory inventory;
-    std::vector<Item> items;
     std::vector<sf::Texture> PrisonLevelItemsTextures;
 
     sf::Texture playerPrisonIdle;

@@ -37,4 +37,4 @@ private:
     bool m_isPlaying;
 };
 
-#endif // ANIMATION_HPP
+#endif

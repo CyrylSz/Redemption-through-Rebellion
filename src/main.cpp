@@ -7,11 +7,11 @@ int main() {
 }
 
 // TO DO:
-// 1. level design
-// 2. loot and barriers
-// 3. key card and elevator
-// 4. game save system
-// 5. animation
-// 6. enemies
-// 7. boss
+// 1. tools & weapons
+// 2. enemies
+// 3. checkpoint system
+// 4. key card and elevator
+// 5. boss
+// 6. level design
+// 7. better doors
 // 8. cutscenes and lore

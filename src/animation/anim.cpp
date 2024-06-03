@@ -33,7 +33,7 @@ void Animation::update(sf::Time deltaTime) {
             if (m_currentFrame + 1 <= m_endFrame) {
                 m_currentFrame++;
             } else {
-                stop(); // Stop the animation when it reaches the end frame of the segment
+                stop();
             }
         }
     }
