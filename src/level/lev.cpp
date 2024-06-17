@@ -19,14 +19,6 @@ Level::Level(int r, int c, sf::Sprite& textureSprite)
 
 }
 
-//Level::~Level() {
-//    for (int i = 0; i < rows; ++i) {
-//        for (int j = 0; j < cols; ++j) {
-//            delete tiles[i][j];
-//        }
-//    }
-//}
-
 void Level::setTile(int row, int col, Tile* tile) {
     if (row < rows && col < cols) {
         tiles[row][col] = tile;
@@ -58,10 +50,6 @@ bool Level::checkCollision(const sf::FloatRect& playerBounds) {
             }
         }
     }
-//    for (const auto& door : doors) {
-//        if (door.boundary.intersects(playerBounds)) {
-//            return true;
-//        }
-//    }
+
     return false;
 }

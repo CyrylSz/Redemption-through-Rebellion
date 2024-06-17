@@ -1,8 +1,8 @@
 #include "door.hpp"
 #include <cmath>
 
-Door::Door(const sf::Vector2f& pos, const sf::Texture& tex, const std::string& dir)
-        : position(pos), sprite(tex), angle(0.f), rotationSpeed(280.f), direction(dir), collisionSize(28.f * 5.f, 4.f * 5.f) { // Zmodyfikowane
+Door::Door(const sf::Vector2f& pos, const sf::Texture& tex, const std::string& dir, short id)
+        : position(pos), sprite(tex), angle(0.f), rotationSpeed(280.f), direction(dir), collisionSize(28.f * 5.f, 4.f * 5.f), id(id) {
 
     sprite.setPosition(position);
     sprite.setOrigin(3.f, 5.f);
@@ -25,7 +25,6 @@ void Door::setInitialRotation(const std::string& dir) {
 }
 
 void Door::updateBoundary() {
-    float halfWidth = collisionSize.x / 2.f;
     float halfHeight = collisionSize.y / 2.f;
 
     sf::Vector2f corner = sprite.getPosition() - sf::Vector2f(0, halfHeight);
@@ -37,22 +36,17 @@ void Door::updateBoundary() {
     boundary = transform.transformRect(boundary);
 }
 
-sf::Vector2f Door::getDirectionVector(float angle) const {
-    float rad = angle * 3.14159265f / 180.f;
-    return sf::Vector2f(std::cos(rad), std::sin(rad));
-}
-
 void Door::update(const sf::FloatRect& playerBounds, sf::Time deltaTime) {
     if (boundary.intersects(playerBounds)) {
         sf::Vector2f playerCenter(playerBounds.left + playerBounds.width / 2.f, playerBounds.top + playerBounds.height / 2.f);
         sf::Vector2f doorCenter = sprite.getPosition();
         sf::Vector2f directionVector = playerCenter - doorCenter;
 
-        float angleToPlayer = atan2(directionVector.y, directionVector.x) * 180.f / 3.14159265f;
+        double angleToPlayer = atan2(directionVector.y, directionVector.x) * 180.f / 3.14159265f;
         float doorAngle = sprite.getRotation();
 
-        float rotationChange = 0.f;
-        float angleDifference = angleToPlayer - doorAngle;
+        float rotationChange;
+        double angleDifference = angleToPlayer - doorAngle;
         if (angleDifference < 0) {
             angleDifference += 360.f;
         }

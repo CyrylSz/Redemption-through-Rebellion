@@ -5,12 +5,13 @@
 
 class Door {
 public:
-    Door(const sf::Vector2f& pos, const sf::Texture& tex, const std::string& dir);
+    Door(const sf::Vector2f& pos, const sf::Texture& tex, const std::string& dir, short id);
 
     void update(const sf::FloatRect& playerBounds, sf::Time deltaTime);
     void draw(sf::RenderWindow& window);
     sf::FloatRect getBounds() const;
     sf::FloatRect boundary;
+    short id;
 
 private:
     sf::Sprite sprite;
@@ -23,7 +24,6 @@ private:
 
     void setInitialRotation(const std::string& dir);
     void updateBoundary();
-    sf::Vector2f getDirectionVector(float angle) const;
 };
 
 #endif

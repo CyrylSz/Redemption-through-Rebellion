@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.27)
 project(Redemption_through_Rebellion)
 
 set(CMAKE_CXX_STANDARD 20)
-
 set(BUILD_SHARED_LIBS FALSE)
 
 include(FetchContent)
@@ -35,6 +34,9 @@ add_executable(Redemption_through_Rebellion src/main.cpp
         src/animation/anim.hpp
         src/level/door.cpp
         src/level/door.hpp
+        src/inventory/bullet.hpp
+        src/inventory/item.hpp
+        src/entity/enemy.hpp
 )
 
 target_link_libraries(Redemption_through_Rebellion PRIVATE fmt::fmt)

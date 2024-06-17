@@ -11,20 +11,15 @@ public:
     void addFrame(const sf::IntRect& frame);
     void setSpriteSheet(const sf::Texture& texture);
     void setFrameTime(sf::Time time);
-
     void play();
     void stop();
     void update(sf::Time deltaTime);
-
-    const sf::Texture* getSpriteSheet() const;
-    sf::IntRect getFrame() const;
-    sf::IntRect getFrame(std::size_t frameIndex) const;
-    std::size_t getCurrentFrameIndex() const;
-
-    bool isPlaying() const;
-
     void setSegment(std::size_t startFrame, std::size_t endFrame);
-    std::size_t getEndFrame() const;
+    [[nodiscard]] sf::IntRect getFrame() const;
+    [[nodiscard]] sf::IntRect getFrame(std::size_t frameIndex) const;
+    [[nodiscard]] std::size_t getCurrentFrameIndex() const;
+    [[nodiscard]] bool isPlaying() const;
+    [[nodiscard]] std::size_t getEndFrame() const;
 
 private:
     std::vector<sf::IntRect> m_frames;

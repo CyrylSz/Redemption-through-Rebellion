@@ -39,10 +39,6 @@ void Animation::update(sf::Time deltaTime) {
     }
 }
 
-const sf::Texture* Animation::getSpriteSheet() const {
-    return m_texture;
-}
-
 sf::IntRect Animation::getFrame() const {
     return m_frames[m_currentFrame];
 }

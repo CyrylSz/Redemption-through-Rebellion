@@ -1,17 +1,26 @@
 #include "menu.hpp"
 #include <fmt/core.h>
 
-Button::Button(const sf::Vector2f& position)
+Button::Button(const sf::Vector2f& position, const std::string& textStr, sf::Font& font)
         : callback(nullptr) {
-
     shape.setSize(sf::Vector2f(300, 75));
     shape.setFillColor(sf::Color::Black);
     shape.setPosition(position.x, position.y);
-}
 
+    text.setFont(font);
+    text.setString(textStr);
+    text.setCharacterSize(36);
+    text.setFillColor(sf::Color::White);
+    centerText(text);
+    text.setPosition(
+            position.x + shape.getSize().x / 2.0f,
+            position.y + shape.getSize().y / 2.0f
+    );
+}
 
 void Button::draw(sf::RenderWindow& window) {
     window.draw(shape);
+    window.draw(text);
 }
 
 bool Button::isHovered(const sf::Vector2f& mousePos) const {
@@ -28,8 +37,23 @@ void Button::onClick() const {
     }
 }
 
-Menu::Menu(sf::RenderWindow& window, const sf::Font& font, const std::string& backgroundPath)
-        : window(window), font(font), buttonYPosition(window.getSize().y / 2.0f + 100.0f) {
+void Button::centerText(sf::Text& text) {
+    sf::FloatRect textBounds = text.getLocalBounds();
+    text.setOrigin(textBounds.left + textBounds.width / 2.0f, textBounds.top + textBounds.height / 2.0f);
+}
+
+void Button::changeButtonMode(bool active) {
+    if (active){
+        shape.setFillColor(sf::Color::Black);
+        text.setFillColor(sf::Color::White);
+    } else {
+        shape.setFillColor(sf::Color(0, 0, 0, 100));
+        text.setFillColor(sf::Color(164, 164, 164));
+    }
+}
+
+Menu::Menu(sf::RenderWindow& window, sf::Font& font, const std::string& backgroundPath)
+        : window(window), font(font), buttonYPosition(window.getSize().y / 2.0f), buttonSpacing(100.0f), verticalOffset(100.0f) {
 
     if (!backgroundTexture.loadFromFile(backgroundPath)) {
         fmt::println("Error while loading background");
@@ -39,67 +63,74 @@ Menu::Menu(sf::RenderWindow& window, const sf::Font& font, const std::string& ba
             window.getSize().x / backgroundSprite.getLocalBounds().width,
             window.getSize().y / backgroundSprite.getLocalBounds().height
     );
+}
 
-    title1.setFont(font);
-    title1.setString("Redemption");
-    title1.setCharacterSize(100);
-    title1.setFillColor(sf::Color::White);
-    title1.setPosition(window.getSize().x / 2.0f - 330, window.getSize().y / 6.0f);
+void Menu::addTitle(const std::string& text, int characterSize, float yOffset) {
+    sf::Text title;
+    title.setFont(font);
+    title.setString(text);
+    title.setCharacterSize(characterSize);
+    title.setFillColor(sf::Color::White);
 
-    title2.setFont(font);
-    title2.setString("through");
-    title2.setCharacterSize(60);
-    title2.setFillColor(sf::Color::White);
-    title2.setPosition(window.getSize().x / 2.0f - 140, window.getSize().y / 6.0f + 125.0f);
+    sf::RectangleShape titleShape;
+    titleShape.setSize(sf::Vector2f(title.getLocalBounds().width, title.getLocalBounds().height));
+    titleShape.setFillColor(sf::Color::Transparent);
+    titleShape.setOutlineColor(sf::Color::Transparent);
+    titleShape.setOutlineThickness(0);
+    titleShape.setPosition(window.getSize().x / 2.0f, window.getSize().y / 6.0f + yOffset);
 
-    title3.setFont(font);
-    title3.setString("Rebellion");
-    title3.setCharacterSize(100);
-    title3.setFillColor(sf::Color::White);
-    title3.setPosition(window.getSize().x / 2.0f - 295, window.getSize().y / 6.0f + 200.0f);
+    centerText(title);
+    title.setPosition(
+            titleShape.getPosition().x,
+            titleShape.getPosition().y
+    );
 
-    title4.setFont(font);
-    title4.setString("Play");
-    title4.setCharacterSize(50);
-    title4.setFillColor(sf::Color::White);
-    title4.setPosition(window.getSize().x / 2.0f - 60, window.getSize().y / 6.0f + 467);
+    titles.push_back(title);
+    titleShapes.push_back(titleShape);
+    centerTitles();
+}
 
-    title5.setFont(font);
-    title5.setString("Restart");
-    title5.setCharacterSize(50);
-    title5.setFillColor(sf::Color::White);
-    title5.setPosition(window.getSize().x / 2.0f - 110, window.getSize().y / 6.0f + 617);
+void Menu::centerTitles() {
+    for (size_t i = 0; i < titles.size(); ++i) {
+        sf::Text& title = titles[i];
+        sf::RectangleShape& titleShape = titleShapes[i];
 
-    title6.setFont(font);
-    title6.setString("Exit");
-    title6.setCharacterSize(50);
-    title6.setFillColor(sf::Color::White);
-    title6.setPosition(window.getSize().x / 2.0f - 60, window.getSize().y / 6.0f + 767);
+        centerText(title);
+        title.setPosition(
+                window.getSize().x / 2.0f,
+                title.getPosition().y
+        );
 
+        titleShape.setPosition(
+                window.getSize().x / 2.0f - titleShape.getSize().x / 2.0f,
+                titleShape.getPosition().y
+        );
+    }
+}
+
+void Menu::centerText(sf::Text& text) {
+    sf::FloatRect textBounds = text.getLocalBounds();
+    text.setOrigin(textBounds.left + textBounds.width / 2.0f, textBounds.top + textBounds.height / 2.0f);
 }
 
 void Menu::addButton(const std::string& text, const std::function<void()>& callback) {
     float buttonWidth = 300.0f;
-    float buttonHeight = 50.0f;
+    float buttonHeight = 75.0f;
     float buttonX = window.getSize().x / 2.0f - buttonWidth / 2.0f;
+    float buttonY = buttonYPosition + buttons.size() * (buttonHeight + buttonSpacing) + verticalOffset;
 
-    buttons.emplace_back(sf::Vector2f(buttonX, buttonYPosition));
+    buttons.emplace_back(sf::Vector2f(buttonX, buttonY), text, font);
     buttons.back().setCallback(callback);
-    buttonYPosition += 150.0f;
 }
 
 void Menu::draw() {
     window.draw(backgroundSprite);
+    for (auto& title : titles) {
+        window.draw(title);
+    }
     for (auto& button : buttons) {
         button.draw(window);
     }
-    window.draw(title1);
-    window.draw(title2);
-    window.draw(title3);
-
-    window.draw(title4);
-    window.draw(title5);
-    window.draw(title6);
 }
 
 void Menu::handleEvent(const sf::Event& event) {
@@ -111,4 +142,8 @@ void Menu::handleEvent(const sf::Event& event) {
             }
         }
     }
+}
+
+void Menu::setButtonSpacing(float spacing) {
+    buttonSpacing = spacing;
 }

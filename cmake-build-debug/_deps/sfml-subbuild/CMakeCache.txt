@@ -26,7 +26,7 @@ CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=C:/Users/Akwar/Documents/Procesy/Redempt
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/sfml-populate
 
-//No help, variable specified on the command line.
+//make program
 CMAKE_MAKE_PROGRAM:FILEPATH=C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/ninja/win/x64/ninja.exe
 
 //Value Computed by CMake
@@ -91,8 +91,8 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
-//Source directory with the top level CMakeLists.txt file for this
-// project
+//Source directory with the top levels CMakeLists.txt file for
+// this project
 CMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/Akwar/Documents/Procesy/Redemption-through-Rebellion/cmake-build-debug/_deps/sfml-subbuild
 //number of local generators
 CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1

@@ -24,7 +24,6 @@ public:
     int cols;
 
     Level(int r, int c, sf::Sprite& textureFile);
-    //~Level();
 
     void setTile(int row, int col, Tile* tile);
     void draw(sf::RenderWindow& window);
