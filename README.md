@@ -1,4 +1,6 @@
 # Redemption through Rebellion
-Demo of a top-down shooter game set in 2080 in a secret underground facility where you are a prisoner subjected to bio-experiments. Suddenly, a mysterious rebellion breaks out...
+A simple top-down shooter game with an inventory system, animations, game saving, and more
 
-(demo of a future game and also school project)
+(school project)
+
+[Download Video Overview](PJC-game-video.mp4)
