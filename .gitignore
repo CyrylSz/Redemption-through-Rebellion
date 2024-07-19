@@ -1,0 +1,12 @@
+# Celem tego pliku jest rekurencyjne blokowanie zbędnych plików (np. konfiguracyjnych) aby nie były wysyłane do gałęzi przy pisaniu "git add ." (btw też usuwa już dodane)
+
+.idea
+cmake-build-debug
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
